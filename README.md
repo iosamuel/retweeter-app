@@ -1,6 +1,8 @@
 # retweeter-app
 
-> Retweet App from Different users
+> Retweet App is to register twitter user tokens into a Hasura GraphQL endpoint & give the ability to manage it's permissions
+
+#### First thing to do is replace `.env.example` to `.env` and replace it's variable's values to your API KEYS and Hasura Endpoint
 
 ## Build Setup
 
