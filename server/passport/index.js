@@ -1,13 +1,16 @@
 const passport = require('passport')
 const TwitterStrategy = require('passport-twitter').Strategy
-const fetch = require('node-fetch')
+const fetchFromGraphQL = require('../utils/fetchFromGraphQL')
+
+const insertSingleEstreamer = require('../graphql/mutations/insertSingleEstreamer.graphql')
+const getEStreamer = require('../graphql/queries/getEStreamer.graphql')
 
 module.exports = function(app) {
   app.use(require('cookie-parser')())
   app.use(
     require('express-session')({
       secret: 'io samuel',
-      resave: true,
+      resave: false,
       saveUninitialized: true
     })
   )
@@ -25,7 +28,28 @@ module.exports = function(app) {
       function(token, tokenSecret, profile, done) {
         profile.access_token = token
         profile.token_secret = tokenSecret
-        return done(null, profile)
+
+        fetchFromGraphQL(getEStreamer, {
+          tid: profile.id
+        }).then(({ data }) => {
+          if (!data.estreamers_by_pk) {
+            fetchFromGraphQL(insertSingleEstreamer, {
+              estreamer: {
+                tid: profile.id,
+                access_token: profile.access_token,
+                token_secret: profile.token_secret
+              },
+              estreamer_permissions: {
+                tid: profile.id,
+                retweet: true
+              }
+            }).then(() => {
+              done(null, profile)
+            })
+          } else {
+            done(null, profile)
+          }
+        })
       }
     )
   )
@@ -40,45 +64,10 @@ module.exports = function(app) {
   app.get('/retweeter/auth', passport.authenticate('twitter'))
   app.get(
     '/retweeter/callback',
-    passport.authenticate('twitter', { failureRedirect: '/retweeter/auth' }),
-    (req, res) => {
-      const query = `
-        mutation {
-          insert_estreamers_one(
-            object: {
-              id: "${req.user.id}",
-              name: "${req.user.displayName}",
-              photo: "${req.user.photos[0].value}",
-              username: "${req.user.username}",
-              access_token: "${req.user.access_token}",
-              token_secret: "${req.user.token_secret}"
-            }
-          ) {
-            id
-            username
-          }
-        }
-      `
-      fetch(process.env.HASURA_GRAPHQL_URL, {
-        method: 'post',
-        Accept: 'api_version=2',
-        'Content-Type': 'application/graphql',
-        body: JSON.stringify({ query }),
-        headers: {
-          'X-Hasura-Admin-Secret': process.env.HASURA_GRAPHQL_ADMIN_SECRET
-        }
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          // eslint-disable-next-line
-          console.log(data)
-        })
-        .catch((err) => {
-          // eslint-disable-next-line
-          console.error('Error:', err)
-        })
-      res.redirect('/')
-    }
+    passport.authenticate('twitter', {
+      failureRedirect: '/retweeter/auth',
+      successRedirect: '/'
+    }) // TODO: Make an Error URL for login
   )
 
   app.get('/logout', (req, res) => {

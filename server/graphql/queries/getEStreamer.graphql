@@ -1,0 +1,7 @@
+module.exports = `
+  query getEStreamer($tid: String!) {
+    estreamers_by_pk(tid: $tid) {
+      tid
+    }
+  }
+`;

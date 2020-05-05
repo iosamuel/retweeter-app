@@ -1,55 +1,35 @@
 <template>
-  <div>
-    <nuxt />
+  <div class="main">
+    <header>
+      <h3><nuxt-link to="/">Retweeter</nuxt-link></h3>
+      <div class="side-header">
+        <template v-if="user">
+          <span>
+            <nuxt-link to="/profile">{{ user.displayName }}</nuxt-link>
+          </span>
+          <img :src="userPhoto" :alt="user.displayName" />
+        </template>
+        <template v-else>
+          <span><nuxt-link to="/login">Login</nuxt-link></span>
+          <fa :icon="['fas', 'user-circle']"></fa>
+        </template>
+      </div>
+    </header>
+    <div class="main__container">
+      <nuxt />
+    </div>
   </div>
 </template>
 
-<style>
-html {
-  font-family: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Roboto, 'Helvetica Neue', Arial, sans-serif;
-  font-size: 16px;
-  word-spacing: 1px;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  box-sizing: border-box;
-}
+<script>
+import { mapState, mapGetters } from 'vuex'
 
-*,
-*:before,
-*:after {
-  box-sizing: border-box;
-  margin: 0;
+export default {
+  computed: {
+    ...mapState(['user']),
+    ...mapGetters(['userPhoto'])
+  }
 }
+</script>
 
-.button--green {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #3b8070;
-  color: #3b8070;
-  text-decoration: none;
-  padding: 10px 30px;
-}
-
-.button--green:hover {
-  color: #fff;
-  background-color: #3b8070;
-}
-
-.button--grey {
-  display: inline-block;
-  border-radius: 4px;
-  border: 1px solid #35495e;
-  color: #35495e;
-  text-decoration: none;
-  padding: 10px 30px;
-  margin-left: 15px;
-}
-
-.button--grey:hover {
-  color: #fff;
-  background-color: #35495e;
-}
-</style>
+<style lang="scss" src="@/assets/css/layouts/default.scss"></style>

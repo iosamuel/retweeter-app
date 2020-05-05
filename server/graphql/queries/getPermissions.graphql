@@ -1,0 +1,7 @@
+module.exports = `
+  query getPermissions($tid: String!) {
+    permissions_by_pk(tid: $tid) {
+      retweet
+    }
+  }
+`;

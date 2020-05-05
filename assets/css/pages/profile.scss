@@ -1,0 +1,38 @@
+.profile {
+  h2 {
+    @apply text-xl font-bold;
+  }
+
+  &__data {
+    @apply flex;
+    @apply my-2 p-4 bg-purple-100 rounded-lg;
+
+    > div {
+      @apply inline-block;
+    }
+
+    &--left {
+      @apply mr-4 p-2;
+    }
+
+    &--right {
+      @apply p-4 border-l-2 border-purple-700;
+      @apply text-lg;
+
+      p {
+        @apply my-2;
+      }
+
+      span {
+        @apply font-semibold;
+      }
+    }
+  }
+
+  &__permissions {
+    &--data {
+      @apply my-2 p-4 bg-purple-300 rounded-lg;
+      @apply text-lg p-4 text-white font-bold;
+    }
+  }
+}

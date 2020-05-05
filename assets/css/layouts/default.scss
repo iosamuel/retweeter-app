@@ -1,0 +1,62 @@
+.main {
+  header {
+    @apply p-4;
+    @apply overflow-hidden flex items-center justify-between sticky;
+    @apply bg-purple-800 shadow-lg text-white;
+
+    h3 {
+      @apply inline-block;
+    }
+
+    .side-header {
+      @apply inline-flex justify-center items-center;
+
+      span {
+        @apply mx-2;
+      }
+
+      svg {
+        width: 32px;
+        height: 32px;
+      }
+
+      img {
+        @apply inline-block rounded-full;
+        width: 32px;
+        height: 32px;
+      }
+    }
+  }
+
+  &__container {
+    @apply p-4;
+  }
+}
+.button--green {
+  display: inline-block;
+  border-radius: 4px;
+  border: 1px solid #3b8070;
+  color: #3b8070;
+  text-decoration: none;
+  padding: 10px 30px;
+}
+
+.button--green:hover {
+  color: #fff;
+  background-color: #3b8070;
+}
+
+.button--grey {
+  display: inline-block;
+  border-radius: 4px;
+  border: 1px solid #35495e;
+  color: #35495e;
+  text-decoration: none;
+  padding: 10px 30px;
+  margin-left: 15px;
+}
+
+.button--grey:hover {
+  color: #fff;
+  background-color: #35495e;
+}

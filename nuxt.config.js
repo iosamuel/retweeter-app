@@ -44,7 +44,8 @@ module.exports = {
    */
   modules: [
     // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    'nuxt-fontawesome'
   ],
   /*
    ** Build configuration
@@ -54,5 +55,18 @@ module.exports = {
      ** You can extend webpack config here
      */
     extend(config, ctx) {}
+  },
+  fontawesome: {
+    component: 'fa',
+    imports: [
+      {
+        set: '@fortawesome/free-solid-svg-icons',
+        icons: ['faUserCircle', 'faCheckCircle']
+      },
+      {
+        set: '@fortawesome/free-brands-svg-icons',
+        icons: ['faTwitter']
+      }
+    ]
   }
 }
