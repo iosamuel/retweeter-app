@@ -6,6 +6,21 @@
         Lista de tweets con el hastag #EStreamerCoders
       </h2>
     </div>
+    <div class="tweets">
+      <div v-for="tweet in tweets" :key="tweet.id" class="tweets__tweet">
+        <div class="profile__data">
+          <div class="profile__data--left">
+            <img :src="tweet.user.profile_image_url" :alt="tweet.user.name" />
+          </div>
+          <div class="profile__data--right">
+            <p><span>Nombre:</span> {{ tweet.user.name }}</p>
+            <p><span>Lugar:</span> {{ tweet.user.location }}</p>
+            <p><span>Descripcion:</span> {{ tweet.user.description }}</p>
+            <p>{{ tweet.text }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -21,12 +36,25 @@ export default {
       // eslint-disable-next-line
       // console.log(context.req.session)
     }
+  },
+  data() {
+    return {
+      tweets: []
+    }
+  },
+  mounted() {
+    this.getTweets()
+  },
+  methods: {
+    getTweets() {
+      fetch('/api/get-tweets', {
+        method: 'get'
+      })
+        .then((res) => res.json())
+        .then((data) => (this.tweets = data))
+    }
   }
 }
 </script>
 
-<style>
-.home {
-  @apply flex items-center justify-center;
-}
-</style>
+<style lang="scss" src="@/assets/css/pages/home.scss"></style>
