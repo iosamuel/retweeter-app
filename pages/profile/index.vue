@@ -2,11 +2,11 @@
   <div class="profile">
     <h2>ESTreamer - @{{ user.username }}</h2>
     <hr />
-    <div class="profile__data">
-      <div class="profile__data--left">
+    <div class="twitter-card__data">
+      <div class="twitter-card__data--left">
         <img :src="userPhotoXL" :alt="user.displayName" />
       </div>
-      <div class="profile__data--right">
+      <div class="twitter-card__data--right">
         <p><span>Nombre:</span> {{ user.displayName }}</p>
         <p><span>Lugar:</span> {{ user._json.location }}</p>
         <p><span>Descripcion:</span> {{ user._json.description }}</p>

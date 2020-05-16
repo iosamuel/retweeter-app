@@ -7,17 +7,17 @@
       </h2>
     </div>
     <div class="tweets">
-      <div v-for="tweet in tweets" :key="tweet.id" class="tweets__tweet">
-        <div class="profile__data">
-          <div class="profile__data--left">
-            <img :src="tweet.user.profile_image_url" :alt="tweet.user.name" />
-          </div>
-          <div class="profile__data--right">
-            <p><span>Nombre:</span> {{ tweet.user.name }}</p>
-            <p><span>Lugar:</span> {{ tweet.user.location }}</p>
-            <p><span>Descripcion:</span> {{ tweet.user.description }}</p>
-            <p>{{ tweet.text }}</p>
-          </div>
+      <div v-for="tweet in tweets" :key="tweet.id" class="twitter-card__data">
+        <div class="twitter-card__data--left">
+          <img
+            :src="getImageURL(tweet.user.profile_image_url)"
+            :alt="tweet.user.name"
+          />
+        </div>
+        <div class="twitter-card__data--right">
+          <p><span>Nombre:</span> {{ tweet.user.name }}</p>
+          <p><span>Lugar:</span> {{ tweet.user.location }}</p>
+          <p class="tweets__tweet">{{ tweet.full_text }}</p>
         </div>
       </div>
     </div>
@@ -52,6 +52,9 @@ export default {
       })
         .then((res) => res.json())
         .then((data) => (this.tweets = data))
+    },
+    getImageURL(url) {
+      return url.replace('_normal', '')
     }
   }
 }

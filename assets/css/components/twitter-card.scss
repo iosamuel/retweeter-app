@@ -1,0 +1,30 @@
+.twitter-card {
+  h2 {
+    @apply text-xl font-bold;
+  }
+
+  &__data {
+    @apply my-2 p-4 bg-purple-100 rounded-lg;
+
+    > div {
+      @apply inline-block;
+    }
+
+    &--left {
+      @apply mr-4 p-2 w-2/12 align-middle;
+    }
+
+    &--right {
+      @apply p-4 border-l-2 border-purple-700 w-8/12 align-middle;
+      @apply text-lg;
+
+      p {
+        @apply my-2;
+      }
+
+      span {
+        @apply font-semibold;
+      }
+    }
+  }
+}
