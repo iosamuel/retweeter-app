@@ -20,13 +20,14 @@
     "passport-twitter": "^1.0.4",
     "cookie-parser": "^1.4.5",
     "express-session": "^1.17.1",
-    "twitter": "^1.7.1"
-  },
-  "devDependencies": {
+    "twitter": "^1.7.1",
+    "nuxt-fontawesome": "^0.4.0",
+    "@fortawesome/vue-fontawesome": "^0.1.9",
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
     "@fortawesome/free-brands-svg-icons": "^5.13.0",
-    "@fortawesome/free-solid-svg-icons": "^5.13.0",
-    "@fortawesome/vue-fontawesome": "^0.1.9",
+    "@fortawesome/free-solid-svg-icons": "^5.13.0"
+  },
+  "devDependencies": {
     "@nuxtjs/eslint-config": "^2.0.0",
     "@nuxtjs/eslint-module": "^1.0.0",
     "@nuxtjs/stylelint-module": "^3.1.0",
@@ -39,7 +40,6 @@
     "node-fetch": "^2.6.0",
     "node-sass": "^4.14.1",
     "nodemon": "^1.18.9",
-    "nuxt-fontawesome": "^0.4.0",
     "prettier": "^1.19.1",
     "sass-loader": "^8.0.2",
     "stylelint": "^10.1.0"
