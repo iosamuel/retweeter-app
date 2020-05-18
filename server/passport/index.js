@@ -2,7 +2,7 @@ const passport = require('passport')
 const TwitterStrategy = require('passport-twitter').Strategy
 const fetchFromGraphQL = require('../utils/fetchFromGraphQL')
 
-const insertSingleEstreamer = require('../graphql/mutations/insertSingleEstreamer.graphql')
+const insertSingleEstreamer = require('../graphql/mutations/InsertSingleEstreamer.graphql')
 const getEStreamer = require('../graphql/queries/getEStreamer.graphql')
 
 module.exports = function(app) {

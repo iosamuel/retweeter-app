@@ -1,8 +1,11 @@
 module.exports = `
-  mutation updateSinglePermission($tid: String!, $permissions: permissions_set_input!) {
+  mutation updateSinglePermission(
+    $tid: String!
+    $permissions: permissions_set_input!
+  ) {
     update_permissions_by_pk(pk_columns: { tid: $tid }, _set: $permissions) {
       tid
       retweet
     }
   }
-`;
+`

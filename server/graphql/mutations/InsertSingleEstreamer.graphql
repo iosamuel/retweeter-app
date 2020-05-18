@@ -1,5 +1,8 @@
 module.exports = `
-  mutation insertSingleEstreamer($estreamer: estreamers_insert_input!, $estreamer_permissions: permissions_insert_input!) {
+  mutation insertSingleEstreamer(
+    $estreamer: estreamers_insert_input!
+    $estreamer_permissions: permissions_insert_input!
+  ) {
     insert_estreamers_one(object: $estreamer) {
       tid
     }
@@ -7,4 +10,4 @@ module.exports = `
       retweet
     }
   }
-`;
+`
