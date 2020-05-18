@@ -18,7 +18,8 @@
     "@nuxtjs/dotenv": "^1.4.0",
     "passport": "^0.4.1",
     "passport-twitter": "^1.0.4",
-    "cookie-parser": "^1.4.5"
+    "cookie-parser": "^1.4.5",
+    "express-session": "^1.17.1"
   },
   "devDependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
@@ -34,8 +35,6 @@
     "eslint-config-prettier": "^6.10.0",
     "eslint-plugin-nuxt": ">=0.4.2",
     "eslint-plugin-prettier": "^3.1.2",
-    "express-session": "^1.17.1",
-    "get-twitter-bearer-token": "^1.0.0",
     "node-fetch": "^2.6.0",
     "node-sass": "^4.14.1",
     "nodemon": "^1.18.9",
