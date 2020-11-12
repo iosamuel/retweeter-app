@@ -1,3 +1,7 @@
+body {
+  @apply bg-gray-200;
+}
+
 .main {
   header {
     @apply p-4;
@@ -32,6 +36,7 @@
     @apply p-4;
   }
 }
+
 .button--green {
   display: inline-block;
   border-radius: 4px;

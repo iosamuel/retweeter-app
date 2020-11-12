@@ -1,35 +1,36 @@
 <template>
   <div class="home">
     <div>
-      <logo />
-      <h2>
-        Lista de tweets con el hastag #EStreamerCoders
+      <h2 class="title">
+        Lista de tweets con el hastag
+        <a
+          target="_blank"
+          href="https://twitter.com/search?q=%23EStreamerCoders&src=typed_query"
+          >#EStreamerCoders</a
+        >
       </h2>
     </div>
     <div class="tweets">
-      <div v-for="tweet in tweets" :key="tweet.id" class="twitter-card__data">
-        <div class="twitter-card__data--left">
-          <img
-            :src="getImageURL(tweet.user.profile_image_url)"
-            :alt="tweet.user.name"
-          />
-        </div>
-        <div class="twitter-card__data--right">
-          <p><span>Nombre:</span> {{ tweet.user.name }}</p>
-          <p><span>Lugar:</span> {{ tweet.user.location }}</p>
-          <p class="tweets__tweet">{{ tweet.full_text }}</p>
-        </div>
+      <div v-for="tweet in tweets" :key="tweet.id">
+        <TwitterCard
+          :place="tweet.user.location"
+          :tweet="tweet.full_text"
+          :name="tweet.user.name"
+          :handle="getHandle(tweet.user.screen_name)"
+          :avatar="getImageURL(tweet.user.profile_image_url)"
+          :time="getTime(tweet.created_at)"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
+import TwitterCard from '~/components/TwitterCard.vue'
 
 export default {
   components: {
-    Logo
+    TwitterCard
   },
   asyncData(context) {
     if (process.server) {
@@ -55,6 +56,16 @@ export default {
     },
     getImageURL(url) {
       return url.replace('_normal', '')
+    },
+    getTime(time) {
+      return new Date(time).toLocaleDateString('en-US', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+      })
+    },
+    getHandle(handle) {
+      return `@${handle}`
     }
   }
 }

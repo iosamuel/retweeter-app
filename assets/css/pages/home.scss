@@ -1,7 +1,15 @@
 @import '@/assets/css/components/twitter-card.scss';
 
 .home {
-  @apply flex items-center justify-center flex-col;
+  @apply flex flex-col items-center justify-center px-5 py-5;
+
+  .title {
+    @apply text-gray-800 text-left text-lg mb-5;
+
+    a {
+      @apply text-blue-500 underline;
+    }
+  }
 
   .tweets {
     .tweets__tweet {
