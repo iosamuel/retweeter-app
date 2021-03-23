@@ -9,7 +9,7 @@ module.exports = function(app) {
   app.use(require('cookie-parser')())
   app.use(
     require('express-session')({
-      secret: 'io samuel',
+      secret: process.env.SESSION_SECRET,
       resave: false,
       saveUninitialized: true
     })
@@ -31,7 +31,7 @@ module.exports = function(app) {
 
         fetchFromGraphQL(getEStreamer, {
           tid: profile.id
-        }).then(({ data }) => {
+        }).then(({ data = {} }) => {
           if (!data.estreamers_by_pk) {
             fetchFromGraphQL(insertSingleEstreamer, {
               estreamer: {
@@ -61,11 +61,11 @@ module.exports = function(app) {
     done(null, obj)
   })
 
-  app.get('/retweeter/auth', passport.authenticate('twitter'))
+  app.get(`/${process.env.TWITTER_AUTH_URL}`, passport.authenticate('twitter'))
   app.get(
-    '/retweeter/callback',
+    `/${process.env.TWITTER_CALLBACK_URL}`,
     passport.authenticate('twitter', {
-      failureRedirect: '/retweeter/auth',
+      failureRedirect: `/${process.env.TWITTER_AUTH_URL}`,
       successRedirect: '/'
     }) // TODO: Make an Error URL for login
   )
